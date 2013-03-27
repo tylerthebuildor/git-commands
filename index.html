@@ -67,10 +67,10 @@
 			},
 		initEvents = function() {
 		
-				document.getElementById('search').onkeyup = function(event) { 
+				el.search.onkeyup = function(event) { 
 					var q = this.value;					
-					q = q.replace('<', '&lt;')
-					q = q.replace('>', '&gt;')
+					q = q.replace(/</g, '&lt;')
+					q = q.replace(/>/g, '&gt;')
 					displayLI(q) 
 				};
 			
