@@ -16,59 +16,92 @@
 	</style>
 	
 </head>
-<body>
+<body onload="init">
 
-	<input type="text" />
-	<table>
-		<tr>
-			<td>git init</td>
-			<td>set up local git repository in current directory</td>
-		</tr>
-		<tr>
-			<td>git add &lt;file&gt;</td>
-			<td>add file to staging area</td>
-		</tr>
-		<tr>
-			<td>git commit -m "Message (present tense)"</td>
-			<td>commit to the changes you've added to stage</td>
-		</tr>
-		<tr>
-			<td>git remote add origin &lt;remote Git file&gt;</td>
-			<td>add remote repository to push to</td>
-		</tr>
-		<tr>
-			<td>git push</td>
-			<td>push commited changes to remote location (for first push append " -u origin master")</td>
-		</tr>
-		<tr>
-			<td>git pull origin &lt;branch&gt;</td>
-			<td>pull branch files and replace with files in working directory</td>
-		</tr>
-	</table>
-	
+	<input type="text" id="search"></input>
+	<table><tbody id="list"></tbody></table>
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script>		
-		/** Search Funciton **/
-		$('input').keyup(
-			function() {
+	
+	/** Init GitCommands **/
+	function init() { GitCommands.init() }
+	
+	/** GitCommands Namespace **/
+	var GitCommands = (function() {
+		
+		/* globals */
+		var el = {
+		
+				list : document.getElementById('list'),
+				search : document.getElementById('search')
+				
+			},
+		template = {
 			
-				var q = this.value,
-				row = document.getElementsByTagName('tr'),
-				i = 0, len = row.length, body
+				LI : '<tr>' +
+								'<td>{command}</td>' +
+								'<td>{desc}</td>' +
+							'</tr>'
 				
-				for( ; i<len; i++) {
-					body = row[i].innerHTML
-					body = body.replace('</td>', '')
-					body = body.replace('</td>', '')
-					body = body.replace('<td>', '')
-					body = body.replace('<td>', '')
-
-					if (q)
-						( body.search(q) >= 0 ) ? row[i].style.display = 'table-row' : row[i].style.display = 'none'
-					else
-						row[i].style.display = 'table-row'					
+			},
+		LI = [
+				{command: 'git init',
+				desc: 'set up local git repository in current directory'},
+				{command: 'git add &lt;file&gt;',
+				desc: 'add file to staging area'},
+				{command: 'git commit -m "Message (present tense)"',
+				desc: 'commit to the changes you\'ve added to stage'},
+				{command: 'git remote add origin &lt;remote Git file&gt;',
+				desc: 'add remote repository to push to'},				
+				{command: 'git push',
+				desc: 'push commited changes to remote location (for first push append " -u origin master")'},
+				{command: 'git pull origin &lt;branch&gt;',
+				desc: 'pull branch files and replace with files in working directory'}			
+			],
+		listLen = LI.length
+		
+		/* functions */
+		var init = function() {
+				displayLI()
+				initEvents()
+			},
+		initEvents = function() {
+		
+				document.getElementById('search').onkeyup = function(event) { 
+					var q = this.value;					
+					q = q.replace('<', '&lt;')
+					q = q.replace('>', '&gt;')
+					displayLI(q) 
+				};
+			
+			},				
+		displayLI = function(q) {
+				var i = 0, text				
+				el.list.innerHTML = ''
+				
+				for( ; i<listLen; i++) {
+					text = LI[i].command + ' ' + LI[i].desc
+					
+					if (q) {
+						( text.search(q) >= 0 ) ? el.list.innerHTML += template.LI.supplant(LI[i]) : null
+					} else {
+						el.list.innerHTML += template.LI.supplant(LI[i])	
+					}
 				}		
-				
-			})
+			}	
+			
+			return { init : init }
+			
+		})();
+		
+		String.prototype.supplant = function (o) {
+			return this.replace(/{([^{}]*)}/g, function (a, b) {
+					var r = o[b];
+					return typeof r === 'string' ? r : a;
+			});
+		};
+		
+		init();
 	</script>
 
 </body>
