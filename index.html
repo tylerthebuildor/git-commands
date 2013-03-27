@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+
+	<title>Git Commands</title>
+	<style>
+		body { font-family: helvetica }
+		table { border-spacing: .5rem }
+		td { padding: .5rem }
+		
+		tr:nth-child(odd) { background: #f0f0f0 }
+		tr:nth-child(even) { background: orange }		
+		
+		td:nth-child(odd) { border: 1px dashed #666 }
+		td:nth-child(even) { border: 1px solid #666 }
+	</style>
+	
+</head>
+<body>
+
+	<input type="text" />
+	<table>
+		<tr>
+			<td>git init</td>
+			<td>set up local git repository in current directory</td>
+		</tr>
+		<tr>
+			<td>git add &lt;file&gt;</td>
+			<td>add file to staging area</td>
+		</tr>
+		<tr>
+			<td>git commit -m "Message (present tense)"</td>
+			<td>commit to the changes you've added to stage</td>
+		</tr>
+		<tr>
+			<td>git remote add origin &lt;remote Git file&gt;</td>
+			<td>add remote repository to push to</td>
+		</tr>
+		<tr>
+			<td>git push</td>
+			<td>push commited changes to remote location (for first push append " -u origin master")</td>
+		</tr>
+		<tr>
+			<td>git pull origin &lt;branch&gt;</td>
+			<td>pull branch files and replace with files in working directory</td>
+		</tr>
+	</table>
+	
+	<script>		
+		/** Search Funciton **/
+		$('input').keyup(
+			function() {
+			
+				var q = this.value,
+				row = document.getElementsByTagName('tr'),
+				i = 0, len = row.length, body
+				
+				for( ; i<len; i++) {
+					body = row[i].innerHTML
+					body = body.replace('</td>', '')
+					body = body.replace('</td>', '')
+					body = body.replace('<td>', '')
+					body = body.replace('<td>', '')
+
+					if (q)
+						( body.search(q) >= 0 ) ? row[i].style.display = 'table-row' : row[i].style.display = 'none'
+					else
+						row[i].style.display = 'table-row'					
+				}		
+				
+			})
+	</script>
+
+</body>
+</html>
