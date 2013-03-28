@@ -1,9 +1,65 @@
-.arrow_box {
+* { 
+	box-sizing: border-box;
+}
+body { font-family: helvetica; }
+#search { 
+	display: block;
+}
+table { 
+	max-width: 700px;
+	border-spacing: .5rem;
+	float: left;
+}
+td { padding: .5rem }
+
+.li:nth-child(odd) { background: #f0f0f0; }
+.li:nth-child(even) { background: orange; }		
+
+.li td:nth-child(odd) { border: 1px dashed #666; }
+.li td:nth-child(even) { border: 1px solid #666; }
+
+#visual {
+	width: 320px;
+	height: 300px;
+	float: left;
+	border-radius: 0 5px 5px 0;
+	background: url(visual.png);
+}
+
+.quiver {
+	position: relative;
+	left: 0;
+	margin-top: 5px;
+	width: 100%;
+}
+
+.arrow {
 	position: relative;
 	background: #88b7d5;
 	border: 4px solid #c2e1f5;
+	height: 15px;
+	margin-top: 20px;
 }
-.arrow_box.right:after, .arrow_box.right:before {
+
+.arrow:first-child {
+	margin-top: 80px;
+}
+
+.posA { left: 33px }
+.posB { left: 113px }
+.posC { left: 193px }
+.posD { left: 273px }
+.left.posA { left: 60px }
+.left.posB { left: 140px }
+.left.posC { left: 217px }
+.left.posD { left: 300px }
+
+.box { width: 15px; }
+.small { width: 70px; }
+.medium { width: 150px; }
+.large { width: 225px; }
+
+.arrow.right:after, .arrow.right:before {
 	left: 100%;
 	border: solid transparent;
 	content: " ";
@@ -13,21 +69,21 @@
 	pointer-events: none;
 }
 
-.arrow_box.right:after {
+.arrow.right:after {
 	border-color: rgba(136, 183, 213, 0);
 	border-left-color: #88b7d5;
-	border-width: 150px;
+	border-width: 10px;
 	top: 50%;
-	margin-top: -150px;
+	margin-top: -10px;
 }
-.arrow_box.right:before {
+.arrow.right:before {
 	border-color: rgba(194, 225, 245, 0);
 	border-left-color: #c2e1f5;
-	border-width: 156px;
+	border-width: 16px;
 	top: 50%;
-	margin-top: -156px;
+	margin-top: -16px;
 }
-.arrow_box.left:after, .arrow_box.left:before {
+.arrow.left:after, .arrow.left:before {
 	right: 100%;
 	border: solid transparent;
 	content: " ";
@@ -37,17 +93,17 @@
 	pointer-events: none;
 }
 
-.arrow_box.left:after {
+.arrow.left:after {
 	border-color: rgba(136, 183, 213, 0);
 	border-right-color: #88b7d5;
-	border-width: 150px;
+	border-width: 10px;
 	top: 50%;
-	margin-top: -150px;
+	margin-top: -10px;
 }
-.arrow_box.left:before {
+.arrow.left:before {
 	border-color: rgba(194, 225, 245, 0);
 	border-right-color: #c2e1f5;
-	border-width: 156px;
+	border-width: 16px;
 	top: 50%;
-	margin-top: -156px;
+	margin-top: -16px;
 }

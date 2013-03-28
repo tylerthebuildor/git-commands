@@ -3,23 +3,17 @@
 <head>
 
 	<title>Git Commands</title>
-	<style>
-		body { font-family: helvetica }
-		table { border-spacing: .5rem }
-		td { padding: .5rem }
-		
-		tr:nth-child(odd) { background: #f0f0f0 }
-		tr:nth-child(even) { background: orange }		
-		
-		td:nth-child(odd) { border: 1px dashed #666 }
-		td:nth-child(even) { border: 1px solid #666 }
-	</style>
+	<link rel="stylesheet" href="main.css" />
 	
 </head>
 <body onload="init">
 
-	<input type="text" id="search"></input>
-	<table><tbody id="list"></tbody></table>
+	<input type="text" id="search" />
+	<table>
+		<tbody id="list"></tbody>
+	</table>
+	<div id="visual"></div>
+	
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<script>		
 	
@@ -34,57 +28,59 @@
 		
 				list : document.getElementById('list'),
 				search : document.getElementById('search'),
+				visual : document.getElementById('visual')
 				
 			},
 		template = {
 			
-				LI : '<tr id="{id}" class="LI">' +
+				li : '<tr id="{id}" class="li">' +
 								'<td>{cmd}</td>' +
 								'<td>{desc}</td>' +
-							'</tr>'
+							'</tr>',
+				trip : '<div class="arrow {spec}"></div>'
 				
 			},
-		LI = [ //&lt;&gt;
-				/*
-				wd == working directory
-				sa == staging area
-				lr == local repository
-				rr == remote repository
-				*/
+		li = [ 
 				{cmd: 'git init',
 				desc: 'set up local git repository in current directory',
-				trip: ['', '']},
+				spec: ['box posC']},
 				{cmd: 'git add &lt;file&gt;',
 				desc: 'add file to staging area',
-				trip: ['wd', 'sa']},
+				spec: ['right small posA']},
 				{cmd: 'git commit -m "Message in present tense"',
 				desc: 'commit to the changes you\'ve added to stage',
-				trip: ['sa', 'lr']},
+				spec: ['right small posB']},
 				{cmd: 'git remote add origin &lt;remote Git file&gt;',
 				desc: 'add remote repository to push to',
-				trip: ['', '']},				
+				spec: ['left large posA']},				
 				{cmd: 'git push',
 				desc: 'push commited changes to remote location (for first push append " -u origin master")',
-				trip: ['lr', 'rr']},
+				spec: ['right small posC']},
 				{cmd: 'git pull origin &lt;branch&gt;',
 				desc: 'pull branch files and replace with files in working directory',
-				trip: ['rr', 'lr']},
+				spec: ['left small posC', 'left medium posA']},
 				{cmd: 'git config credential.helper cache',
 				desc: 'cache password for the next 15 minutes',
-				trip: ['', '']},
+				spec: ['box posC']},
 				{cmd: 'git checkout &lt;branch&gt;',
 				desc: 'replace current working directory files with &lt;branch&gt; files',
-				trip: ['lr', 'wd']},
-				{cmd: 'git checkout &lt;branch&gt;',
-				desc: 'replace current working directory files with &lt;branch&gt; files',
-				trip: ['lr', 'wd']}
+				spec: ['left medium posA']},
+				{cmd: 'git branch &lt;name&gt;',
+				desc: 'creates branch with &lt;name&gt;',
+				spec: ['box posC']},
+				{cmd: 'git checkout -b &lt;name&gt;',
+				desc: 'create branch and check it out',
+				spec: ['box posC']},
+				{cmd: 'git push -u origin &lt;branch&gt;',
+				desc: 'add local branch to remote repository',
+				spec: ['box posC', 'left medium posA']}
 			],
-		listLen = LI.length
+		listLen = li.length
 		
 		/* functions */
 		var init = function() {
 		
-				displayLI()
+				displayli()
 				initEvents()
 				
 			},
@@ -94,33 +90,39 @@
 					var q = this.value					
 					q = q.replace(/</g, '&lt;')
 					q = q.replace(/>/g, '&gt;')
-					displayLI(q) 
+					displayli(q) 
 				}
 				
 				el.list.onclick = function(event) {
 					var element = event.target.parentElement
-					if (element.getAttribute('class') === 'LI')
-						drawTrip( LI[element.getAttribute('id')] )
+					if (element.getAttribute('class') === 'li')
+						drawTrip( element.getAttribute('id') )
 				}
 			
 			},				
-		displayLI = function(q) {
+		displayli = function(q) {
 				var i = 0, text				
 				el.list.innerHTML = ''
 				
 				for( ; i<listLen; i++) {
-					text = LI[i].cmd + ' ' + LI[i].desc
-					LI[i].id = i
+					text = li[i].cmd + ' ' + li[i].desc
+					li[i].id = i
 					
 					if (q) {
-						( text.search(q) >= 0 ) ? el.list.innerHTML += template.LI.supplant(LI[i]) : null
+						( text.search(q) >= 0 ) ? el.list.innerHTML += template.li.supplant(li[i]) : null
 					} else {
-						el.list.innerHTML += template.LI.supplant(LI[i])	
+						el.list.innerHTML += template.li.supplant(li[i])	
 					}
 				}		
 			},
-		drawTrip = function(LI) {
-				console.log(LI);
+		drawTrip = function(index) {
+				var i = 0, len = li[index].spec.length
+				el.visual.innerHTML = ''
+				
+				for( ; i<len; i++) {
+					el.visual.innerHTML += template.trip.supplant({spec : li[index].spec[i]})
+				}
+				
 			}
 			
 			return { init : init }
