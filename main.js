@@ -9,8 +9,10 @@ var GitCommands = (function() {
 	
 			list : document.getElementById('list'),
 			search : document.getElementById('search'),
+			searchi : document.getElementById('search').nextSibling,
 			visual : document.getElementById('visual'),
-			dropdown: document.getElementById('dropdown')
+			dropdown: document.getElementById('dropdown'),
+			
 			
 		},
 	template = {
@@ -27,6 +29,9 @@ var GitCommands = (function() {
 			
 		},
 	li = [ 
+			{cmd: 'command', 
+			desc: 'description',
+			config: 'label'},
 			{cmd: 'git init',
 			desc: 'set up local git repository in current directory',
 			config: ['box posC']},
@@ -78,18 +83,28 @@ var GitCommands = (function() {
 				q = q.replace(/>/g, '&gt;')
 				displayli(q) 
 				
-				/*
-				var toggle = (q) ? 'inherit' : 'none'
-				el.clear.style.display = toggle;
-				*/
+				var toggle = (q) ? '&#xf057;' : '&#xf002;'
+				el.searchi.innerHTML = toggle
 				
 				el.visual.innerHTML = ''
 			}
 			
+			el.searchi.onclick = function(event) {
+				this.innerHTML = '&#xf002;'
+				this.previousSibling.value = ''		
+				displayli()
+			}
+			
 			el.list.onclick = function(event) {
 				var element = event.target.parentElement				
-				if (element.getAttribute('class') === 'li')
-					drawTrip( element.getAttribute('id') )
+				if (element.getAttribute('class') === 'li') {
+				
+					drawConfig( element.getAttribute('id') )
+					
+					document.getElementsByClassName('selected')[0].removeClass('selected')
+					element.addClass('selected')
+					
+				}
 			}
 			
 			el.visual.onclick = function(event) {
@@ -104,20 +119,24 @@ var GitCommands = (function() {
 		
 		},				
 	displayli = function(q) {
-			var i = 0, text				
-			el.list.innerHTML = template.li_label.supplant({cmd: 'command', desc: 'description'})
+			var i = 0, text, output
+			el.list.innerHTML = ''
 			
 			for( ; i<listLen; i++) {
-				text = li[i].cmd + ' ' + li[i].desc
+				text = li[i].cmd + ' ' + li[i].desc				
 				li[i].id = i
 				
-				if (q)
-					( text.search(q) >= 0 ) ? el.list.innerHTML += template.li.supplant(li[i]) : null
+				if (li[i].config == 'label') 
+					output = template.li_label.supplant(li[i])
+				else if (q)
+					output = ( text.search(q) > -1 ) ? template.li.supplant(li[i]) : ''
 				else
-					el.list.innerHTML += template.li.supplant(li[i])	
+					output = template.li.supplant(li[i])	
+					
+				el.list.innerHTML += output
 			}		
 		},
-	drawTrip = function(index) {
+	drawConfig = function(index) {
 			var i = 0, len = li[index].config.length
 			el.visual.innerHTML = ''
 			

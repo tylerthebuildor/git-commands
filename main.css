@@ -4,11 +4,41 @@
 * { box-sizing: border-box; }
 body { font-family: helvetica; }
 
+::-moz-selection { 
+background-color: #333; 
+color: #fff;
+}
+
+::selection {
+background-color: #333;
+color: #fff;
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('fontawesome-webfont.eot?v=3.0.1');
+  src: url('fontawesome-webfont.eot?#iefix&v=3.0.1') format('embedded-opentype'),
+    url('fontawesome-webfont.woff?v=3.0.1') format('woff'),
+    url('fontawesome-webfont.ttf?v=3.0.1') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+i { 
+	font-family: 'FontAwesome'; 
+	font-style: normal;
+	font-size: 1.5rem;
+	cursor: pointer;
+}
+i:hover { color: blue; }
+i:active { color: red; }
+
 /* ---------------------------------------------------------------------------
  * Header
  * --------------------------------------------------------------------------- */
 header {	
-	float: right;
+	position: fixed;
+	right: 0;
 	width: 50%;
 	min-width: 320px;
 	text-align: center;
@@ -16,18 +46,28 @@ header {
 }
 
 #search { 	
+	position: relative;
 	border: 3px solid lightblue;
 	font-size: 1.5rem;
 	height: 40px;
-	padding: 0 1rem 0 1rem;
+	padding: 0 2.5rem 0 1rem;
 	width: 90%;		
 }
 
+#search + i {
+	position: absolute;
+	right: 7%;
+	top: .35rem;
+}
+
 #dropdown {
-	width: 24px;
-	height: 24px;
-	background: red;
+	display: block;
 	margin: .5rem 5%;
+	width: 5rem;
+	background: white;
+	border: 0px solid #666;
+	border-radius: 5px;
+	padding: 2px;
 }
 
 #visual {	
@@ -40,6 +80,8 @@ header {
 	min-height: 100px;
 	width: 320px;
 }
+#visual:hover { border-color: blue; }
+#visual:active { border-color: red; }
 
 /* ---------------------------------------------------------------------------
  * List
@@ -56,9 +98,15 @@ table {
 	border-spacing: .5rem;
 }
 
-.label {
+tr.label {
 	font-weight: bold;
 	text-align: center;
+	background: #bbb;
+	color: #666;
+}
+
+.selected td:first-child {
+	background: green;
 }
 
 /* ---------------------------------------------------------------------------
@@ -146,14 +194,12 @@ table {
  * --------------------------------------------------------------------------- */
 @media screen and (max-width: 660px) { 
 	header { 
-		float: none;
-		width: 100%;
-		position: fixed;
 		top: 0;
+		width: 100%;
 	} 
 	table {
 		width: 100%;
-		margin-top: 80px;
+		margin-top: 85px;
 	}
 	body {
 		margin: 0;
