@@ -10,7 +10,7 @@ var GitCommands = (function() {
 			list : document.getElementById('list'),
 			search : document.getElementById('search'),
 			searchi : document.getElementById('search').nextSibling,
-			visual : document.getElementById('visual'),
+			graph : document.getElementById('graph'),
 			dropdown: document.getElementById('dropdown'),
 			
 			
@@ -86,7 +86,7 @@ var GitCommands = (function() {
 				var toggle = (q) ? '&#xf057;' : '&#xf002;'
 				el.searchi.innerHTML = toggle
 				
-				el.visual.innerHTML = ''
+				el.graph.innerHTML = ''
 			}
 			
 			el.searchi.onclick = function(event) {
@@ -107,13 +107,13 @@ var GitCommands = (function() {
 				}
 			}
 			
-			el.visual.onclick = function(event) {
-				el.visual.style.display = 'none'
+			el.graph.onclick = function(event) {
+				el.graph.style.display = 'none'
 				el.dropdown.style.display = 'inherit'
 			}
 			
 			el.dropdown.onclick = function(event) {
-				el.visual.style.display = 'inherit'
+				el.graph.style.display = 'inherit'
 				el.dropdown.style.display = 'none'
 			}
 		
@@ -138,10 +138,10 @@ var GitCommands = (function() {
 		},
 	drawConfig = function(index) {
 			var i = 0, len = li[index].config.length
-			el.visual.innerHTML = ''
+			el.graph.innerHTML = ''
 			
 			for( ; i<len; i++) {
-				el.visual.innerHTML += template.trip.supplant({config : li[index].config[i]})
+				el.graph.innerHTML += template.trip.supplant({config : li[index].config[i]})
 			}
 			
 		}

@@ -3,15 +3,19 @@
  * --------------------------------------------------------------------------- */
 * { box-sizing: border-box; }
 body { font-family: helvetica; }
+input#search:focus { 
+	border-color: red;
+	outline: 0;
+}
 
 ::-moz-selection { 
-background-color: #333; 
-color: #fff;
+	color: #fff;
+	background-color: #333; 	
 }
 
 ::selection {
-background-color: #333;
-color: #fff;
+	color: #fff;
+	background-color: #333;	
 }
 
 @font-face {
@@ -20,37 +24,36 @@ color: #fff;
   src: url('fontawesome-webfont.eot?#iefix&v=3.0.1') format('embedded-opentype'),
     url('fontawesome-webfont.woff?v=3.0.1') format('woff'),
     url('fontawesome-webfont.ttf?v=3.0.1') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+	font-style: normal;
+	font-weight: normal;  
 }
 
 i { 
+	cursor: pointer;
 	font-family: 'FontAwesome'; 
 	font-style: normal;
-	font-size: 1.5rem;
-	cursor: pointer;
-}
-i:hover { color: blue; }
-i:active { color: red; }
+	font-size: 1.5rem;	
+} i:hover { color: blue; }
+  i:active { color: red; }
 
 /* ---------------------------------------------------------------------------
  * Header
  * --------------------------------------------------------------------------- */
-header {	
+header {		
+	min-width: 320px;	
+	margin-top: .5rem;
 	position: fixed;
 	right: 0;
-	width: 50%;
-	min-width: 320px;
 	text-align: center;
-	margin-top: .5rem;
+	width: 50%;
 }
 
-#search { 	
-	position: relative;
+#search { 		
 	border: 3px solid lightblue;
 	font-size: 1.5rem;
 	height: 40px;
 	padding: 0 2.5rem 0 1rem;
+	position: relative;
 	width: 90%;		
 }
 
@@ -61,53 +64,48 @@ header {
 }
 
 #dropdown {
+	background: #fff;
+	border: 2px solid #666;
+	border-radius: 5px;
 	display: block;
 	margin: .5rem 5%;
-	width: 5rem;
-	background: white;
-	border: 0px solid #666;
-	border-radius: 5px;
-	padding: 2px;
+	width: 2rem;	
 }
 
-#visual {	
+#graph {	
 	background: url(visual.png);	
-	border: 1px solid black;
+	border: 2px solid #666;
 	border-radius: 5px;
 	display: none;
-	margin: auto;
-	margin-top: 10px;
+	margin: .5rem 5%;
 	min-height: 100px;
 	width: 320px;
-}
-#visual:hover { border-color: blue; }
-#visual:active { border-color: red; }
+} #graph:hover { border-color: blue; }
+  #graph:active { border-color: red; }
 
 /* ---------------------------------------------------------------------------
  * List
  * --------------------------------------------------------------------------- */
 td { padding: .5rem; }
-tr:nth-child(odd) { background: #f0f0f0; }
-tr:nth-child(even) { background: orange; }		
+tr:nth-child(odd) { background: rgba(0,220,0,1); }
+tr:nth-child(even) { background: rgba(230,200,0,1); }		
 tr td:nth-child(odd) { border: 1px dashed #666; }
 tr td:nth-child(even) { border: 1px solid #666; }
 
-table { 
-	width: 50%;
-	min-width: 320px;
+table { 	
 	border-spacing: .5rem;
+	min-width: 320px;
+	width: 50%;	
 }
 
 tr.label {
-	font-weight: bold;
-	text-align: center;
-	background: #bbb;
+	background: #f0f0f0;
 	color: #666;
+	font-weight: bold;
+	text-align: center;	
 }
 
-.selected td:first-child {
-	background: green;
-}
+.selected td:first-child { background: green; }
 
 /* ---------------------------------------------------------------------------
  * Arrow
@@ -124,65 +122,68 @@ tr.label {
 .arrow:first-child { margin-top: 80px; }
 
 .arrow.right:after, .arrow.right:before {
-	left: 100%;
 	border: solid transparent;
 	content: " ";
 	height: 0;
-	width: 0;
+	left: 100%;
 	position: absolute;
 	pointer-events: none;
+	width: 0;	
 }
 
 .arrow.right:after {
 	border-color: rgba(136, 183, 213, 0);
 	border-left-color: #88b7d5;
 	border-width: 10px;
-	top: 50%;
 	margin-top: -10px;
+	top: 50%;	
 }
+
 .arrow.right:before {
 	border-color: rgba(194, 225, 245, 0);
 	border-left-color: #c2e1f5;
 	border-width: 16px;
-	top: 50%;
 	margin-top: -16px;
+	top: 50%;	
 }
+
 .arrow.left:after, .arrow.left:before {
-	right: 100%;
 	border: solid transparent;
 	content: " ";
 	height: 0;
-	width: 0;
 	position: absolute;
 	pointer-events: none;
+	right: 100%;
+	width: 0;
 }
 
 .arrow.left:after {
 	border-color: rgba(136, 183, 213, 0);
 	border-right-color: #88b7d5;
 	border-width: 10px;
-	top: 50%;
 	margin-top: -10px;
+	top: 50%;	
 }
+
 .arrow.left:before {
 	border-color: rgba(194, 225, 245, 0);
 	border-right-color: #c2e1f5;
 	border-width: 16px;
-	top: 50%;
 	margin-top: -16px;
+	top: 50%;	
 }
 
 /* ---------------------------------------------------------------------------
  * Config
  * --------------------------------------------------------------------------- */
-.posA { left: 33px }
-.posB { left: 113px }
-.posC { left: 193px }
-.posD { left: 273px }
-.left.posA { left: 60px }
-.left.posB { left: 140px }
-.left.posC { left: 217px }
-.left.posD { left: 300px }
+.posA { left: 33px; }
+.posB { left: 113px; }
+.posC { left: 193px; }
+.posD { left: 273px; }
+.left.posA { left: 60px; }
+.left.posB { left: 140px; }
+.left.posC { left: 217px; }
+.left.posD { left: 300px; }
 
 .box { width: 15px; }
 .small { width: 70px; }
@@ -193,16 +194,17 @@ tr.label {
  * Media Screens
  * --------------------------------------------------------------------------- */
 @media screen and (max-width: 660px) { 
+
+	body { margin: 0; }
+	
 	header { 
 		top: 0;
 		width: 100%;
 	} 
+	
 	table {
-		width: 100%;
 		margin-top: 85px;
-	}
-	body {
-		margin: 0;
+		width: 100%;		
 	}
 	
 }
