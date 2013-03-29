@@ -9,7 +9,8 @@ var GitCommands = (function() {
 	
 			list : document.getElementById('list'),
 			search : document.getElementById('search'),
-			visual : document.getElementById('visual')
+			visual : document.getElementById('visual'),
+			dropdown: document.getElementById('dropdown')
 			
 		},
 	template = {
@@ -22,43 +23,43 @@ var GitCommands = (function() {
 									'<td>{cmd}</td>' +
 									'<td>{desc}</td>' +
 								'</tr>',
-			trip : '<div class="arrow {spec}"></div>'
+			trip : '<div class="arrow {config}"></div>'
 			
 		},
 	li = [ 
 			{cmd: 'git init',
 			desc: 'set up local git repository in current directory',
-			spec: ['box posC']},
+			config: ['box posC']},
 			{cmd: 'git add &lt;file&gt;',
 			desc: 'add file to staging area',
-			spec: ['right small posA']},
+			config: ['right small posA']},
 			{cmd: 'git commit -m "Message in present tense"',
 			desc: 'commit to the changes you\'ve added to stage',
-			spec: ['right small posB']},
+			config: ['right small posB']},
 			{cmd: 'git remote add origin &lt;remote Git file&gt;',
 			desc: 'add remote repository to push to',
-			spec: ['left large posA']},				
+			config: ['left large posA']},				
 			{cmd: 'git push',
 			desc: 'push commited changes to remote location (for first push append " -u origin master")',
-			spec: ['right small posC']},
+			config: ['right small posC']},
 			{cmd: 'git pull origin &lt;branch&gt;',
 			desc: 'pull branch files and replace with files in working directory',
-			spec: ['left small posC', 'left medium posA']},
+			config: ['left small posC', 'left medium posA']},
 			{cmd: 'git config credential.helper cache',
 			desc: 'cache password for the next 15 minutes',
-			spec: ['box posC']},
+			config: ['box posC']},
 			{cmd: 'git checkout &lt;branch&gt;',
 			desc: 'replace current working directory files with &lt;branch&gt; files',
-			spec: ['left medium posA']},
+			config: ['left medium posA']},
 			{cmd: 'git branch &lt;name&gt;',
 			desc: 'creates branch with &lt;name&gt;',
-			spec: ['box posC']},
+			config: ['box posC']},
 			{cmd: 'git checkout -b &lt;name&gt;',
 			desc: 'create branch and check it out',
-			spec: ['box posC', 'left medium posA']},
+			config: ['box posC', 'left medium posA']},
 			{cmd: 'git push -u origin &lt;branch&gt;',
 			desc: 'add local branch to remote repository',
-			spec: ['box posC']}
+			config: ['box posC']}
 		],
 	listLen = li.length
 	
@@ -76,12 +77,29 @@ var GitCommands = (function() {
 				q = q.replace(/</g, '&lt;')
 				q = q.replace(/>/g, '&gt;')
 				displayli(q) 
+				
+				/*
+				var toggle = (q) ? 'inherit' : 'none'
+				el.clear.style.display = toggle;
+				*/
+				
+				el.visual.innerHTML = ''
 			}
 			
 			el.list.onclick = function(event) {
 				var element = event.target.parentElement				
 				if (element.getAttribute('class') === 'li')
 					drawTrip( element.getAttribute('id') )
+			}
+			
+			el.visual.onclick = function(event) {
+				el.visual.style.display = 'none'
+				el.dropdown.style.display = 'inherit'
+			}
+			
+			el.dropdown.onclick = function(event) {
+				el.visual.style.display = 'inherit'
+				el.dropdown.style.display = 'none'
 			}
 		
 		},				
@@ -100,11 +118,11 @@ var GitCommands = (function() {
 			}		
 		},
 	drawTrip = function(index) {
-			var i = 0, len = li[index].spec.length
+			var i = 0, len = li[index].config.length
 			el.visual.innerHTML = ''
 			
 			for( ; i<len; i++) {
-				el.visual.innerHTML += template.trip.supplant({spec : li[index].spec[i]})
+				el.visual.innerHTML += template.trip.supplant({config : li[index].config[i]})
 			}
 			
 		}
@@ -113,6 +131,7 @@ var GitCommands = (function() {
 	
 })()
 
+/** Supplant **/
 if (!String.prototype.supplant) {
 	String.prototype.supplant = function (o) {
 		return this.replace(/{([^{}]*)}/g,
@@ -124,4 +143,5 @@ if (!String.prototype.supplant) {
 	}
 }
 
+/* init */
 init()
