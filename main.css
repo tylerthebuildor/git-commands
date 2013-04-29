@@ -1,8 +1,11 @@
+
 /* ---------------------------------------------------------------------------
  * Document
  * --------------------------------------------------------------------------- */
 * { box-sizing: border-box; }
+
 body { font-family: helvetica; }
+
 input#search:focus { 
 	border-color: red;
 	outline: 0;
@@ -39,6 +42,7 @@ i {
 /* ---------------------------------------------------------------------------
  * Header
  * --------------------------------------------------------------------------- */
+
 header {		
 	min-width: 320px;	
 	margin-top: .5rem;
@@ -49,7 +53,7 @@ header {
 }
 
 #search { 		
-	border: 3px solid lightblue;
+	border: 3px solid blue;
 	font-size: 1.5rem;
 	height: 40px;
 	padding: 0 2.5rem 0 1rem;
@@ -86,9 +90,10 @@ header {
 /* ---------------------------------------------------------------------------
  * List
  * --------------------------------------------------------------------------- */
+
 td { padding: .5rem; }
-tr:nth-child(odd) { background: rgba(0,220,0,1); }
-tr:nth-child(even) { background: rgba(230,200,0,1); }		
+tr:nth-child(odd) { background: rgba(0, 100, 255, 0.7); }
+tr:nth-child(even) { background: #bbb; }		
 tr td:nth-child(odd) { border: 1px dashed #666; }
 tr td:nth-child(even) { border: 1px solid #666; }
 
@@ -105,11 +110,12 @@ tr.label {
 	text-align: center;	
 }
 
-.selected td:first-child { background: green; }
+.selected td:first-child { border-color: red; }
 
 /* ---------------------------------------------------------------------------
  * Arrow
  * --------------------------------------------------------------------------- */
+
 .arrow {	
 	background: #88b7d5;
 	border: 4px solid #c2e1f5;
@@ -176,6 +182,7 @@ tr.label {
 /* ---------------------------------------------------------------------------
  * Config
  * --------------------------------------------------------------------------- */
+
 .posA { left: 33px; }
 .posB { left: 113px; }
 .posC { left: 193px; }
@@ -193,6 +200,7 @@ tr.label {
 /* ---------------------------------------------------------------------------
  * Media Screens
  * --------------------------------------------------------------------------- */
+
 @media screen and (max-width: 660px) { 
 
 	body { margin: 0; }

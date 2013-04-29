@@ -11,8 +11,7 @@ var GitCommands = (function() {
 			search : document.getElementById('search'),
 			searchi : document.getElementById('search').nextSibling,
 			graph : document.getElementById('graph'),
-			dropdown: document.getElementById('dropdown'),
-			
+			dropdown: document.getElementById('dropdown')
 			
 		},
 	template = {
@@ -50,6 +49,9 @@ var GitCommands = (function() {
 			{cmd: 'git pull origin &lt;branch&gt;',
 			desc: 'pull branch files and replace with files in working directory',
 			config: ['left small posC', 'left medium posA']},
+			{cmd: 'git rm &lt;file&gt;',
+			desc: 'remove file from working directory and local repo ("git push" after to remove from remote repo)',
+			config: ['box posA', 'box posC']},
 			{cmd: 'git config credential.helper cache',
 			desc: 'cache password for the next 15 minutes',
 			config: ['box posC']},
@@ -64,7 +66,7 @@ var GitCommands = (function() {
 			config: ['box posC', 'left medium posA']},
 			{cmd: 'git push -u origin &lt;branch&gt;',
 			desc: 'add local branch to remote repository',
-			config: ['box posC']}
+			config: ['right large posA']}
 		],
 	listLen = li.length
 	
