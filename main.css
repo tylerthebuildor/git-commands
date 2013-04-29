@@ -91,11 +91,18 @@ header {
  * List
  * --------------------------------------------------------------------------- */
 
-td { padding: .5rem; }
+td { 
+	cursor: pointer;
+	padding: .5rem; 
+}
 tr:nth-child(odd) { background: rgba(0, 100, 255, 0.7); }
-tr:nth-child(even) { background: #bbb; }		
-tr td:nth-child(odd) { border: 1px dashed #666; }
-tr td:nth-child(even) { border: 1px solid #666; }
+tr:nth-child(even) { background: #bbb; }
+tr td {
+	border-width: 2px;
+	border-color: #666;
+}		
+tr td:nth-child(odd) { border-style: dashed; }
+tr td:nth-child(even) { border-style: solid; }
 
 table { 	
 	border-spacing: .5rem;
