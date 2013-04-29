@@ -100,11 +100,12 @@ var GitCommands = (function() {
 			el.list.onclick = function(event) {
 				var element = event.target.parentElement				
 				if (element.getAttribute('class') === 'li') {
+
+					if (document.getElementsByClassName('selected')[0])
+						document.getElementsByClassName('selected')[0].className = 'li'
+					element.className = 'li selected'
 				
 					drawConfig( element.getAttribute('id') )
-					
-					document.getElementsByClassName('selected')[0].removeClass('selected')
-					element.addClass('selected')
 					
 				}
 			}
