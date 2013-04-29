@@ -110,7 +110,7 @@ tr.label {
 	text-align: center;	
 }
 
-.selected td:first-child { border-color: red; }
+.selected td { border-color: red; }
 
 /* ---------------------------------------------------------------------------
  * Arrow
