@@ -117,7 +117,10 @@ var GitCommands = (function() {
 			config: ['box posC']},
 			{cmd: 'git branch -r',
 			desc: 'list remote branches',
-			config: ['left small posD']}
+			config: ['left small posD']},
+			{cmd: 'git push -u <remote> --force',
+			desc: 'override all files in remote repo',
+			config: ['right small posC']}
 		],
 	listLen = li.length
 	
