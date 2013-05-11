@@ -120,7 +120,16 @@ var GitCommands = (function() {
 			config: ['left small posD']},
 			{cmd: 'git push -u <remote> --force',
 			desc: 'override all files in remote repo',
-			config: ['right small posC']}
+			config: ['right small posC']},
+			{cmd: 'git config user.name "Billy Everyteen"',
+			desc: 'set username for remote push add --global for all repos',
+			config: ['right small posC']},
+			{cmd: 'git config user.name "Billy Everyteen"',
+			desc: 'set username for remote push add --global for all repos',
+			config: ['right small posC']},
+			{cmd: "git config credential.helper 'cache --timeout=3600'",
+			desc: 'cache password for period of time',
+			config: ['box posC']}
 		],
 	listLen = li.length
 	
