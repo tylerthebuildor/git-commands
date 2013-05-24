@@ -16,14 +16,14 @@ var GitCommands = (function() {
 		},
 	template = {
 		
-			li : '<tr id="{id}" class="li">' +
+			li :'<tr id="{id}" class="li">' +
+					'<td>{cmd}</td>' +
+					'<td>{desc}</td>' +
+				'</tr>',
+			li_label: 	'<tr class="label">' +
 							'<td>{cmd}</td>' +
 							'<td>{desc}</td>' +
 						'</tr>',
-			li_label : '<tr class="label">' +
-									'<td>{cmd}</td>' +
-									'<td>{desc}</td>' +
-								'</tr>',
 			trip : '<div class="arrow {config}"></div>'
 			
 		},
@@ -161,11 +161,14 @@ var GitCommands = (function() {
 			}
 			
 			el.list.onclick = function(event) {
-				var element = event.target.parentElement				
+				var element = event.target.parentElement
+				var selected = document.getElementsByClassName('selected')[0];
+
 				if (element.getAttribute('class') === 'li') {
 
-					if (document.getElementsByClassName('selected')[0])
-						document.getElementsByClassName('selected')[0].className = 'li'
+					if (selected)
+						selected.className = 'li'
+					
 					element.className = 'li selected'
 				
 					drawConfig( element.getAttribute('id') )
