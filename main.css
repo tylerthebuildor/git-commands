@@ -5,8 +5,7 @@
 * { box-sizing: border-box; }
 
 body { 
-	font-family: helvetica; 
-	background-image: url(bg.png);
+	font-family: helvetica;
 }
 
 input#search:focus { 
@@ -103,16 +102,11 @@ td {
 	padding: .5rem; 
 }
 tr:nth-child(odd) { background: rgba(0, 100, 255, 0.7); }
-tr:nth-child(even) { background: #bbb; }
-tr td {
-	border-width: 2px;
-	border-color: #666;
+tr:nth-child(even) { background: #d6d6d6; }
+
+tr:hover {
+	background: orange;
 }
-tr td:hover {
-	border-color: blue;
-}	
-tr td:nth-child(odd) { border-style: dashed; }
-tr td:nth-child(even) { border-style: solid; }
 
 table { 	
 	border-spacing: .5rem;
@@ -127,7 +121,7 @@ tr.label {
 	text-align: center;	
 }
 
-.selected td { border-color: red !important; }
+.selected td { background: orange; }
 
 /* ---------------------------------------------------------------------------
  * Arrow

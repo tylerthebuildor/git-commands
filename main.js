@@ -162,7 +162,7 @@ var GitCommands = (function() {
 			
 			el.list.onclick = function(event) {
 				var element = event.target.parentElement
-				var selected = document.getElementsByClassName('selected')[0];
+				var selected = document.getElementsByClassName('selected')[0]
 
 				if (element.getAttribute('class') === 'li') {
 
